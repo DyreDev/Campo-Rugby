@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\kaioc\\Documents\\GitHub\\campo-rugby\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|c:\\users\\kaioc\\documents\\github\\campo-rugby\\scripts\\campo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|solutionrelative:scripts\\campo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|c:\\users\\kaioc\\documents\\github\\campo-rugby\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|solutionrelative:scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\kaioc\\DOCUMENTS\\GITHUB\\CAMPO-RUGBY\\Scripts\\Player.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player.cs",
+              "ToolTip": "C:\\Users\\kaioc\\DOCUMENTS\\GITHUB\\CAMPO-RUGBY\\Scripts\\Player.cs",
+              "RelativeToolTip": "Scripts\\Player.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T13:10:01.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Campo.cs",
+              "DocumentMoniker": "C:\\Users\\kaioc\\Documents\\GitHub\\campo-rugby\\Scripts\\Campo.cs",
+              "RelativeDocumentMoniker": "Scripts\\Campo.cs",
+              "ToolTip": "C:\\Users\\kaioc\\Documents\\GitHub\\campo-rugby\\Scripts\\Campo.cs",
+              "RelativeToolTip": "Scripts\\Campo.cs",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAcwKEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T17:40:46.097Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

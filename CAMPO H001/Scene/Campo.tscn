@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmgcp2cv38tui"]
+
+[ext_resource type="Script" uid="uid://bpqeck6wct6xe" path="res://Scripts/Campo.cs" id="1_fd73y"]
+
+[node name="Campo" type="Node2D"]
+script = ExtResource("1_fd73y")
+
+[node name="Camera2D" type="Camera2D" parent="."]
