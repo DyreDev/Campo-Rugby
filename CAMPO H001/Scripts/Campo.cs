@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class Campo : Node2D
@@ -10,15 +11,28 @@ public partial class Campo : Node2D
 
     private Dictionary<Vector2, List<string>> propriedadesCelulas = new Dictionary<Vector2, List<string>>();
     private Camera2D camera;
-    private const float VelocidadeMovimento = 500f;
+    private const float VelocidadeMovimento = 800f;
 
-    public PackedScene playerScene;
+    //public PackedScene playerScene;
+
+    //private Bola bola;
+    //private bool breakdownAtivo = false;
+    //private Vector2 posicaoBreakdown;
+    //private List<Jogador> jogadoresNoBreakdown = new List<Jogador>();
+
+    //private Node2D indicadorBreakdown;
+
+    //private List<Jogador> jogadores = new List<Jogador>(); // Lista para armazenar jogadores
+    //private Jogador jogadorSelecionado = null; // Jogador atualmente selecionado
+
 
     // Chamado quando o nó entra na cena
     public override void _Ready()
     {
         base._Ready();
         CriarGrid();
+        //CriarJogadores();
+        //InicializarBola();
         camera = GetNode<Camera2D>("Camera2D");
     }
 
@@ -158,4 +172,340 @@ public partial class Campo : Node2D
 
         camera.Position += movimento * VelocidadeMovimento * (float)delta;
     }
+
+    //-----------------------------------------------------------------------------------------------------------
+
+    // Método para inicializar a bola
+    /*private void InicializarBola()
+    {
+        bola = new Bola();
+        bola.Inicializar(TAMANHO_CELULA);
+        AddChild(bola);
+
+        // Dar a bola para um jogador inicial (por exemplo, o primeiro jogador do time A)
+        if (jogadores.Count > 0)
+        {
+            var jogadorInicial = jogadores.Find(j => j.Time == "A" && j.Numero == 1);
+            if (jogadorInicial != null)
+            {
+                bola.TransferirBola(jogadorInicial);
+                jogadorInicial.AtualizarVisualComBola();
+            }
+        }
+    }
+
+    // Adicione uma chamada para InicializarBola() em _Ready() após CriarJogadores()
+
+    // Modificar o método _Input para incluir tackles e breakdowns
+    public override void _Input(InputEvent @event)
+    {
+        // Se um breakdown estiver ativo, não permitir seleção normal
+        if (breakdownAtivo)
+        {
+            ManipularInputBreakdown(@event);
+            return;
+        }
+
+        // Verificar se o usuário clicou com o mouse
+        if (@event is InputEventMouseButton mouseEvent && mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.Pressed)
+        {
+            // Converter a posição do mouse para coordenadas do grid
+            Vector2 posicaoMouse = GetLocalMousePosition();
+            int gridX = (int)(posicaoMouse.X / TAMANHO_CELULA);
+            int gridY = (int)(posicaoMouse.Y / TAMANHO_CELULA);
+
+            // Verificar se está dentro dos limites do campo
+            if (gridX >= 0 && gridX < LARGURA && gridY >= 0 && gridY < ALTURA)
+            {
+                // Se já temos um jogador selecionado, verificar ação a tomar
+                if (jogadorSelecionado != null)
+                {
+                    // Verificar se há um jogador na célula clicada
+                    Jogador jogadorAlvo = null;
+                    foreach (var jogador in jogadores)
+                    {
+                        if (jogador != jogadorSelecionado && jogador.PosX == gridX && jogador.PosY == gridY)
+                        {
+                            jogadorAlvo = jogador;
+                            break;
+                        }
+                    }
+
+                    if (jogadorAlvo != null)
+                    {
+                        // Se o jogador selecionado é de time diferente e está adjacente, tentar tackle
+                        if (jogadorSelecionado.Time != jogadorAlvo.Time && jogadorSelecionado.EstaAdjacente(jogadorAlvo))
+                        {
+                            if (jogadorAlvo.TemBola && jogadorSelecionado.TentarTackle(jogadorAlvo))
+                            {
+                                IniciarBreakdown(jogadorSelecionado, jogadorAlvo);
+                                jogadorSelecionado.Desselecionar();
+                                jogadorSelecionado = null;
+                                return;
+                            }
+                        }
+                    }
+
+                    // Verificar se a célula está vazia para movimento normal
+                    bool celulaVazia = jogadorAlvo == null;
+
+                    if (celulaVazia)
+                    {
+                        jogadorSelecionado.MoverPara(gridX, gridY);
+                        if (jogadorSelecionado.TemBola)
+                        {
+                            bola.AtualizarPosicao();
+                        }
+                        jogadorSelecionado.Desselecionar();
+                        jogadorSelecionado = null;
+                    }
+                }
+                else
+                {
+                    // Verificar se há um jogador na posição clicada
+                    foreach (var jogador in jogadores)
+                    {
+                        if (jogador.PosX == gridX && jogador.PosY == gridY)
+                        {
+                            jogadorSelecionado = jogador;
+                            jogadorSelecionado.Selecionar();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Método para iniciar um breakdown
+    private void IniciarBreakdown(Jogador defensor, Jogador portadorBola)
+    {
+        breakdownAtivo = true;
+        posicaoBreakdown = new Vector2(portadorBola.PosX, portadorBola.PosY);
+
+        // Determinar jogadores no breakdown (3x3 ao redor do portador)
+        jogadoresNoBreakdown.Clear();
+        jogadoresNoBreakdown.Add(portadorBola);
+        jogadoresNoBreakdown.Add(defensor);
+
+        // Adicionar indicador visual
+        CriarIndicadorBreakdown(portadorBola.PosX, portadorBola.PosY);
+
+        // Adicionar outros jogadores que estão próximos
+        foreach (var jogador in jogadores)
+        {
+            if (jogador != portadorBola && jogador != defensor)
+            {
+                int distX = Math.Abs(jogador.PosX - portadorBola.PosX);
+                int distY = Math.Abs(jogador.PosY - portadorBola.PosY);
+
+                if (distX <= 1 && distY <= 1)
+                {
+                    jogadoresNoBreakdown.Add(jogador);
+                }
+            }
+        }
+
+        // Marcar jogadores como em breakdown
+        foreach (var jogador in jogadoresNoBreakdown)
+        {
+            jogador.EmBreakdown = true;
+        }
+
+        // Mostrar interface de breakdown
+        MostrarInterfaceBreakdown();
+    }
+
+    // Método para mostrar a interface do breakdown
+    private void MostrarInterfaceBreakdown()
+    {
+        // Interface simples para o breakdown
+        var painel = new Panel();
+        painel.Position = new Vector2(400, 300);
+        painel.Size = new Vector2(300, 200);
+        painel.Name = "PainelBreakdown";
+
+        var titulo = new Label();
+        titulo.Text = "BREAKDOWN!";
+        titulo.Position = new Vector2(10, 10);
+        titulo.Size = new Vector2(280, 30);
+        painel.AddChild(titulo);
+
+        // Criar botões de resolução
+        var botaoTimeA = new Button();
+        botaoTimeA.Text = "Time A vence";
+        botaoTimeA.Position = new Vector2(10, 50);
+        botaoTimeA.Size = new Vector2(130, 50);
+        botaoTimeA.Pressed += () => ResolverBreakdown("A");
+        painel.AddChild(botaoTimeA);
+
+        var botaoTimeB = new Button();
+        botaoTimeB.Text = "Time B vence";
+        botaoTimeB.Position = new Vector2(150, 50);
+        botaoTimeB.Size = new Vector2(130, 50);
+        botaoTimeB.Pressed += () => ResolverBreakdown("B");
+        painel.AddChild(botaoTimeB);
+
+        // Botão para resolver automaticamente
+        var botaoAuto = new Button();
+        botaoAuto.Text = "Resolver Automaticamente";
+        botaoAuto.Position = new Vector2(10, 110);
+        botaoAuto.Size = new Vector2(280, 50);
+        botaoAuto.Pressed += ResolverBreakdownAutomatico;
+        painel.AddChild(botaoAuto);
+
+        AddChild(painel);
+    }
+
+    // Método para manipular input durante o breakdown
+    private void ManipularInputBreakdown(InputEvent @event)
+    {
+        // Durante o breakdown, podemos adicionar inputs específicos se necessário
+    }
+
+    // Resolver o breakdown com vencedor predeterminado
+    private void ResolverBreakdown(string timeVencedor)
+    {
+        Jogador novoPortador = null;
+
+        // Encontrar um jogador do time vencedor que está no breakdown
+        foreach (var jogador in jogadoresNoBreakdown)
+        {
+            if (jogador.Time == timeVencedor)
+            {
+                novoPortador = jogador;
+                break;
+            }
+        }
+
+        if (novoPortador != null)
+        {
+            // Transferir a bola para o novo portador
+            bola.TransferirBola(novoPortador);
+            novoPortador.AtualizarVisualComBola();
+        }
+
+        FinalizarBreakdown();
+    }
+
+    // Resolver o breakdown automaticamente com base na força dos jogadores
+    private void ResolverBreakdownAutomatico()
+    {
+        // Calcular força total por time
+        int forcaTimeA = 0;
+        int forcaTimeB = 0;
+        int contadorTimeA = 0;
+        int contadorTimeB = 0;
+
+        foreach (var jogador in jogadoresNoBreakdown)
+        {
+            if (jogador.Time == "A")
+            {
+                forcaTimeA += jogador.Forca;
+                contadorTimeA++;
+            }
+            else
+            {
+                forcaTimeB += jogador.Forca;
+                contadorTimeB++;
+            }
+        }
+
+        // Calcular médias ponderadas (mais jogadores = vantagem)
+        float mediaA = contadorTimeA > 0 ? forcaTimeA * (1.0f + 0.1f * contadorTimeA) : 0;
+        float mediaB = contadorTimeB > 0 ? forcaTimeB * (1.0f + 0.1f * contadorTimeB) : 0;
+
+        // Adicionar fator aleatório (20%)
+        float aleatorioA = (float)GD.RandRange(0.9f, 1.1f);
+        float aleatorioB = (float)GD.RandRange(0.9f, 1.1f);
+
+        mediaA *= aleatorioA;
+        mediaB *= aleatorioB;
+
+        // Determinar vencedor
+        string timeVencedor = mediaA > mediaB ? "A" : "B";
+        ResolverBreakdown(timeVencedor);
+    }
+
+    // Finalizar o breakdown
+    private void FinalizarBreakdown()
+    {
+        // Remover interface de breakdown
+        var painel = GetNode<Panel>("PainelBreakdown");
+        if (painel != null)
+        {
+            painel.QueueFree();
+        }
+
+        // Remover indicador visual
+        if (indicadorBreakdown != null)
+        {
+            indicadorBreakdown.QueueFree();
+            indicadorBreakdown = null;
+        }
+
+        // Resetar estado dos jogadores
+        foreach (var jogador in jogadoresNoBreakdown)
+        {
+            jogador.EmBreakdown = false;
+        }
+
+        jogadoresNoBreakdown.Clear();
+        breakdownAtivo = false;
+    }
+
+    //-----------------------------------------------------------------------------------------------------------
+    private void CriarIndicadorBreakdown(int posX, int posY)
+    {
+        indicadorBreakdown = new Node2D();
+
+        // Criar uma área 3x3 destacada
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                int cellX = posX + x;
+                int cellY = posY + y;
+
+                // Verificar se está dentro dos limites do campo
+                if (cellX >= 0 && cellX < LARGURA && cellY >= 0 && cellY < ALTURA)
+                {
+                    var highlight = new ColorRect();
+                    highlight.Size = new Vector2(TAMANHO_CELULA, TAMANHO_CELULA);
+                    highlight.Position = new Vector2(cellX * TAMANHO_CELULA, cellY * TAMANHO_CELULA);
+                    highlight.Color = new Color(1, 1, 0, 0.3f); // Amarelo translúcido
+                    indicadorBreakdown.AddChild(highlight);
+                }
+            }
+        }
+
+        AddChild(indicadorBreakdown);
+    
+    //-----------------------------------------------------------------------------------------------------------
+
+   private void CriarJogadores()
+    {
+        if (playerScene == null)
+        {
+            GD.PrintErr("playerScene não foi carregado corretamente.");
+            return;
+        }
+
+        // Criar jogador atacante (com bola)
+        Jogador atacante = (Jogador)playerScene.Instantiate();
+        atacante.Nome = "Atacante";
+        atacante.Position = new Vector2(10 * TAMANHO_CELULA, 36 * TAMANHO_CELULA);
+        atacante.TemBola = true; // Começa com a bola
+        jogadores.Add(atacante);
+        AddChild(atacante);
+
+        // Criar jogador defensor
+        Jogador defensor = (Jogador)playerScene.Instantiate();
+        defensor.Nome = "Defensor";
+        defensor.Position = new Vector2(20 * TAMANHO_CELULA, 36 * TAMANHO_CELULA);
+        jogadores.Add(defensor);
+        AddChild(defensor);
+
+        GD.Print("Jogadores criados.");
+    }*/
 }

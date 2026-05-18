@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj2njw53q5psy"]
+
+[ext_resource type="Script" uid="uid://pay4q1tpatvp" path="res://Scripts/Bola.cs" id="1_un8k6"]
+
+[node name="Bola" type="Node2D"]
+script = ExtResource("1_un8k6")

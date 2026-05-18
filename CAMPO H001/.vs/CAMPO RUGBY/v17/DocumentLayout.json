@@ -1,14 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\kaioc\\Documents\\GitHub\\campo-rugby\\",
+  "WorkspaceRootPath": "C:\\Users\\kaioc\\Documents\\CampoRugby\\CAMPO H001\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|c:\\users\\kaioc\\documents\\github\\campo-rugby\\scripts\\campo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|solutionrelative:scripts\\campo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|c:\\users\\kaioc\\documents\\camporugby\\campo h001\\scripts\\bola.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|solutionrelative:scripts\\bola.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|c:\\users\\kaioc\\documents\\github\\campo-rugby\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|solutionrelative:scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|c:\\users\\kaioc\\documents\\camporugby\\campo h001\\scripts\\jogador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|solutionrelative:scripts\\jogador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|c:\\users\\kaioc\\documents\\camporugby\\campo h001\\scripts\\campo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC43770C-FBE8-400D-8DE2-15D08104004E}|Campo Rugby.csproj|solutionrelative:scripts\\campo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,31 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Users\\kaioc\\DOCUMENTS\\GITHUB\\CAMPO-RUGBY\\Scripts\\Player.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player.cs",
-              "ToolTip": "C:\\Users\\kaioc\\DOCUMENTS\\GITHUB\\CAMPO-RUGBY\\Scripts\\Player.cs",
-              "RelativeToolTip": "Scripts\\Player.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "Campo.cs",
+              "DocumentMoniker": "C:\\Users\\kaioc\\Documents\\CampoRugby\\CAMPO H001\\Scripts\\Campo.cs",
+              "RelativeDocumentMoniker": "Scripts\\Campo.cs",
+              "ToolTip": "C:\\Users\\kaioc\\Documents\\CampoRugby\\CAMPO H001\\Scripts\\Campo.cs",
+              "RelativeToolTip": "Scripts\\Campo.cs",
+              "ViewState": "AgIAAM0BAAAAAAAAAAAYwP4BAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T13:10:01.275Z"
+              "WhenOpened": "2025-03-04T17:40:46.097Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Jogador.cs",
+              "DocumentMoniker": "C:\\Users\\kaioc\\Documents\\CampoRugby\\CAMPO H001\\Scripts\\Jogador.cs",
+              "RelativeDocumentMoniker": "Scripts\\Jogador.cs",
+              "ToolTip": "C:\\Users\\kaioc\\Documents\\CampoRugby\\CAMPO H001\\Scripts\\Jogador.cs",
+              "RelativeToolTip": "Scripts\\Jogador.cs",
+              "ViewState": "AgIAAJ4AAAAAAAAAAAAYwM8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-07T21:12:41.471Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Campo.cs",
-              "DocumentMoniker": "C:\\Users\\kaioc\\Documents\\GitHub\\campo-rugby\\Scripts\\Campo.cs",
-              "RelativeDocumentMoniker": "Scripts\\Campo.cs",
-              "ToolTip": "C:\\Users\\kaioc\\Documents\\GitHub\\campo-rugby\\Scripts\\Campo.cs",
-              "RelativeToolTip": "Scripts\\Campo.cs",
-              "ViewState": "AgIAAH4AAAAAAAAAAAAcwKEAAAAAAAAAAAAAAA==",
+              "Title": "Bola.cs",
+              "DocumentMoniker": "C:\\Users\\kaioc\\Documents\\CampoRugby\\CAMPO H001\\Scripts\\Bola.cs",
+              "RelativeDocumentMoniker": "Scripts\\Bola.cs",
+              "ToolTip": "C:\\Users\\kaioc\\Documents\\CampoRugby\\CAMPO H001\\Scripts\\Bola.cs",
+              "RelativeToolTip": "Scripts\\Bola.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAA0wDMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T17:40:46.097Z",
+              "WhenOpened": "2025-03-07T21:11:41.35Z",
               "EditorCaption": ""
             }
           ]
